@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HADES RNG - RYUMA HUB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: #0e0e0e;
+      color: white;
+      overflow: hidden;
+    }
+
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff5050;
+      text-shadow: 0 0 15px #ff5050;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-weight: 300;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .box {
+      background: rgba(30, 30, 30, 0.85);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(255, 80, 80, 0.3);
+      backdrop-filter: blur(10px);
+      animation: float 4s ease-in-out infinite;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 14px;
+      background-color: #222;
+      color: #fff;
+      resize: none;
+      outline: none;
+      box-shadow: inset 0 0 10px #00000080;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #ff5050, #ff1a8c);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 0 15px #ff505050;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff5050;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #777;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="particles" id="particles"></canvas>
+
+  <div class="container">
+    <h1>HADES RNG</h1>
+    <h2>Created by RYUMA HUB</h2>
+
+    <div class="box">
+      <textarea id="script" readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/RyumaHub/1/refs/heads/main/hades%20rng.lua.txt"))()</textarea>
+      <button onclick="copyScript()">✨ Copy Script ✨</button>
+    </div>
+
+    <div class="footer">© 2025 RYUMA HUB — All rights reserved</div>
+  </div>
+
+  <script>
+    function copyScript() {
+      const textArea = document.getElementById("script");
+      textArea.select();
+      document.execCommand("copy");
+      alert("✅ Script copied to clipboard!");
+    }
+
+    // Particles animation 🎇
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ff5050";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
