@@ -114,7 +114,7 @@
     <h2>Created by RYUMA HUB</h2>
 
     <div class="box">
-      <textarea id="script" readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/RyumaHub/1/refs/heads/main/hades%20rng.lua.txt"))()</textarea>
+      <textarea id="script" readonly>loadstring(game:HttpGet("https://raw.githubusercontent.com/RyumaHub/1/refs/heads/main/hades%20rng.lua"))()</textarea>
       <button onclick="copyScript()">✨ Copy Script ✨</button>
     </div>
 
